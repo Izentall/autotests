@@ -1,4 +1,4 @@
-package Bots;
+package Utils;
 
 public class User
 {
