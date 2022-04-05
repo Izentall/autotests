@@ -13,14 +13,14 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MainTest
 {
-    private static final String OR_RU_URL = "https://ok.ru/";
+    private static final String OK_RU_URL = "https://ok.ru/";
 
     @Test
     public void testLogin()
     {
         try
         {
-            open(OR_RU_URL);
+            open(OK_RU_URL);
             User user = new User("Юрий Кичигин", "+79022715570", getPassword());
             MainPage mainPage = new LoginPage().login(user);
             assert mainPage.getUserName().equals(user.name);
@@ -38,8 +38,8 @@ public class MainTest
     {
         try
         {
-            User user = new User("Юрий Кичигин", "s", "S");
-            open(OR_RU_URL);
+            open(OK_RU_URL);
+            User user = new User("Юрий Кичигин", "+79022715570", "S");
             new LoginPage().login(user);
             closeWindow();
             assert false;
