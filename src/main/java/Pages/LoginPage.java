@@ -14,13 +14,18 @@ public class LoginPage extends BasePage
 
     public MainPage login(User user)
     {
-        $(EMAIL_FIELD).sendKeys(user.login);
-        $(PASSWORD_FIELD).sendKeys(user.password);
+        $(EMAIL_FIELD).sendKeys(user.getLogin());
+        $(PASSWORD_FIELD).sendKeys(user.getPassword());
         $(LOGIN_BUTTON).click();
         if ($(LOGIN_ERROR).isDisplayed())
         {
             throw new IllegalArgumentException("Wrong login or password");
         }
         return new MainPage(user);
+    }
+
+    public boolean checkCorrectPage()
+    {
+        return isDisplayed(LOGIN_BUTTON) && isDisplayed(PASSWORD_FIELD) && isDisplayed(EMAIL_FIELD);
     }
 }

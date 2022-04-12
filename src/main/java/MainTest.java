@@ -1,11 +1,8 @@
 import Utils.User;
 import Pages.LoginPage;
 import Pages.MainPage;
+import Utils.UserBuilder;
 import org.junit.Test;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 
 import static com.codeborne.selenide.Selenide.closeWindow;
 import static com.codeborne.selenide.Selenide.open;
@@ -21,9 +18,13 @@ public class MainTest
         try
         {
             open(OK_RU_URL);
-            User user = new User("Юрий Кичигин", "+79022715570", getPassword());
+            User user = new UserBuilder()
+                    .setName("Юрий Кичигин")
+                    .setLogin("+79022715570")
+                    .setPassword(User.getMyPassword())
+                    .build();
             MainPage mainPage = new LoginPage().login(user);
-            assert mainPage.getUserName().equals(user.name);
+            assert mainPage.getUserName().equals(user.getName());
         }
         catch (Exception exception)
         {
@@ -39,7 +40,11 @@ public class MainTest
         try
         {
             open(OK_RU_URL);
-            User user = new User("Юрий Кичигин", "+79022715570", "S");
+            User user = new UserBuilder()
+                    .setName("Юрий Кичигин")
+                    .setLogin("+79022715570")
+                    .setPassword(User.getMyPassword())
+                    .build();
             new LoginPage().login(user);
             closeWindow();
             assert false;
@@ -51,12 +56,26 @@ public class MainTest
         }
     }
 
-    private static String getPassword() throws IOException
+    @Test
+    public void testLogout()
     {
-        FileReader reader = new FileReader("src\\main\\resources\\password.txt");
-        Scanner scanner = new Scanner(reader);
-        String password = scanner.nextLine();
-        reader.close();
-        return password;
+        try
+        {
+            open(OK_RU_URL);
+            User user = new UserBuilder()
+                    .setName("Юрий Кичигин")
+                    .setLogin("+79022715570")
+                    .setPassword(User.getMyPassword())
+                    .build();
+            MainPage mainPage = new LoginPage().login(user);
+            LoginPage loginPage = mainPage.topToolbar.clickOnUserButton().logout();
+            assert loginPage.checkCorrectPage();
+        }
+        catch (Exception exception)
+        {
+            System.err.println(exception.getMessage());
+            assert false;
+        }
+        closeWindow();
     }
 }
