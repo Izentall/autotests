@@ -1,6 +1,6 @@
 package Pages.Windows;
 
-import Utils.TopToolbar;
+import Pages.Elements.TopToolbar;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;

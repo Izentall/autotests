@@ -1,7 +1,9 @@
 package Pages;
 
-import Utils.TopToolbar;
+import Pages.Elements.TopToolbar;
 import Utils.User;
+
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class GuestsPage extends BasePage
 {
@@ -11,5 +13,11 @@ public class GuestsPage extends BasePage
     public GuestsPage(User user)
     {
         this.user = user;
+    }
+
+    @Override
+    public boolean checkCorrectPage()
+    {
+        return url().contains("ok.ru/guests");
     }
 }

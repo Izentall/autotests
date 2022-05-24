@@ -2,7 +2,7 @@ package Utils;
 
 public class UserBuilder
 {
-    private User user;
+    private final User user = new User();
 
     public UserBuilder setName(String name)
     {

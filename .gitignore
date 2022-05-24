@@ -3,4 +3,12 @@
 /.idea/
 /build/
 /target/
+
+# Allure ignored files
+/allure-results/*.json
+/allure-results/*.png
+/allure-results/*attachment*
+!/allure-results/categories.json
+
+# Password
 password.txt

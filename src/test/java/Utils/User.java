@@ -22,9 +22,11 @@ public class User
         this(user.name, user.login, user.password);
     }
 
+    public User() {}
+
     public static String getMyPassword() throws IOException
     {
-        FileReader reader = new FileReader("src\\main\\resources\\password.txt");
+        FileReader reader = new FileReader("src\\test\\resources\\password.txt");
         Scanner scanner = new Scanner(reader);
         String password = scanner.nextLine();
         reader.close();
